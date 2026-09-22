@@ -1,15 +1,18 @@
 import uuid
+from swap_meet.item import Item
 
+class Decor(Item):
+    def __init__(self, id=None, width=0, length=0, condition=0):
+        super().__init__(id, condition)
 
-class Decor:
-    def __init__(self, id=None, width=0, length=0):
-        if id is not None:
-            self.id = id
-        else:
-            self.id = uuid.uuid4().int   
+        # if id is not None:
+        #     self.id = id
+        # else:
+        #     self.id = uuid.uuid4().int   
 
         self.width = width
         self.length = length
+        # self.condition = condition 
 
     def get_category(self):
         return "Decor"
