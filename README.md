@@ -59,7 +59,7 @@ At submission time, no matter where you are, submit the project via Learn.
 
 In Wave 1 we will create the `Vendor` class.
 
-- There is a module (file) named `vendor.py` inside of the `swap_meet` package (folder)
+- There is a module (file) named `vendor.py` inside of the `swap_meet` package (folder) 
 - Inside this module, there is a class named `Vendor`
 - Each `Vendor` will have an attribute named `inventory`, which is an empty list by default
 - When we instantiate an instance of `Vendor`, we can optionally pass in a list with the keyword argument `inventory`
