@@ -64,3 +64,17 @@ class Vendor:
 
         return True
 
+#wave 6
+    def get_by_category(self, category):
+        items_by_category = []
+        
+        for item in self.inventory:
+            if item.get_category() == category:
+                items_by_category.append(item)
+        return items_by_category
+
+    def get_best_by_category(self, category):
+        pass
+
+    def swap_best_by_category(self, other, my_priority, their_priority):
+        pass
