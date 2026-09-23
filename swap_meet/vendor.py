@@ -64,3 +64,63 @@ class Vendor:
 
         return True
 
+    # Wave 6
+    def get_by_category(self, category):
+        category_inventory = []
+        
+        for item in self.inventory:
+            if category == item.get_category():
+                category_inventory.append(item)
+
+        return category_inventory
+
+    def get_best_by_category(self, category):
+
+        initial_condition = 0
+        highest_condition_item = None
+        
+        for item in self.inventory:
+
+            if category == item.get_category():
+
+                if item.condition > initial_condition:
+                    initial_condition = item.condition
+                    highest_condition_item = item
+        
+        return highest_condition_item
+
+    def swap_best_by_category(self, other_vendor, my_priority, their_priority):
+
+        if other_vendor.inventory == []:
+            return False
+        
+        if self.inventory == []:
+            return False
+
+        my_items_category = []
+        for item in self.inventory:
+            my_items_category.append(item.get_category())
+
+        if their_priority not in my_items_category:
+            return False
+
+        their_items_category = []
+        for item in other_vendor.inventory:
+            their_items_category.append(item.get_category())
+
+        if my_priority not in their_items_category:
+            return False 
+
+        my_best_item = self.get_best_by_category(their_priority)
+        their_best_item = other_vendor.get_best_by_category(my_priority)
+
+        other_vendor.inventory.remove(their_best_item)
+        self.inventory.remove(my_best_item)
+
+        other_vendor.inventory.append(my_best_item)
+        self.inventory.append(their_best_item)
+
+        return True
+
+                    
+        
