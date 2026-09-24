@@ -5,10 +5,6 @@ from swap_meet.clothing import Clothing
 from swap_meet.decor import Decor
 from swap_meet.electronics import Electronics
 
-
-
-
-
 # @pytest.mark.skip
 def test_swap_by_newest():
     item_a = Clothing(condition=2.0, age=5)
@@ -31,8 +27,9 @@ def test_swap_by_newest():
 
     result = tai.swap_by_newest(jesse)
 
-    assert result
+    assert result is True
     assert len(tai.inventory) == 5
     assert len(jesse.inventory) == 5
-
+    assert item_c in jesse.inventory
+    assert item_f in tai.inventory
     
