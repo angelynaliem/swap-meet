@@ -10,6 +10,7 @@ def test_item_overrides_to_string():
     item_as_string = str(item)
 
     expected_result = f"An object of type Item with id {test_id}."
+    
     assert item_as_string == expected_result
 
 # @pytest.mark.skip
@@ -38,7 +39,7 @@ def test_swap_items_returns_true():
     assert item_d not in jolie.inventory
     assert item_e in jolie.inventory
     assert item_b in jolie.inventory
-    assert result
+    assert result is True
 
 # @pytest.mark.skip
 def test_swap_items_when_my_item_is_missing_returns_false():
@@ -65,7 +66,7 @@ def test_swap_items_when_my_item_is_missing_returns_false():
     assert len(jolie.inventory) == 2
     assert item_d in jolie.inventory
     assert item_e in jolie.inventory
-    assert not result
+    assert result is False
 
 # @pytest.mark.skip
 def test_swap_items_when_their_item_is_missing_returns_false():
@@ -92,7 +93,7 @@ def test_swap_items_when_their_item_is_missing_returns_false():
     assert len(jolie.inventory) == 2
     assert item_d in jolie.inventory
     assert item_e in jolie.inventory
-    assert not result
+    assert result is False
 
 # @pytest.mark.skip
 def test_swap_items_from_my_empty_returns_false():
@@ -110,9 +111,9 @@ def test_swap_items_from_my_empty_returns_false():
 
     result = fatimah.swap_items(jolie, nobodys_item, item_d)
 
-    assert len(fatimah.inventory) == 0
+    assert fatimah.inventory == []
     assert len(jolie.inventory) == 2
-    assert not result
+    assert result is False
 
 # @pytest.mark.skip
 def test_swap_items_from_their_empty_returns_false():
@@ -131,4 +132,6 @@ def test_swap_items_from_their_empty_returns_false():
 
     result = fatimah.swap_items(jolie, item_b, nobodys_item)
 
-    assert result == False
+    assert result is False
+    assert len(fatimah.inventory) == 3
+    assert jolie.inventory == []

@@ -48,6 +48,7 @@ def test_best_by_category():
 
     best_item = tai.get_best_by_category("Clothing")
 
+    assert best_item is item_c
     assert best_item.get_category() == "Clothing"
     assert best_item.condition == pytest.approx(4.0)
 
@@ -78,6 +79,7 @@ def test_best_by_category_with_duplicates():
     best_item = tai.get_best_by_category("Clothing")
 
     # Assert
+    assert best_item in [item_b, item_c]
     assert best_item.get_category() == "Clothing"
     assert best_item.condition == pytest.approx(4.0)
 
@@ -107,7 +109,7 @@ def test_swap_best_by_category():
         their_priority="Decor"
     )
 
-    assert result
+    assert result is True
     assert len(tai.inventory) == 3 and len(jesse.inventory) == 3
     assert tai.inventory == [item_a, item_b, item_f] and jesse.inventory == [item_d, item_e, item_c]
     # *********************************************************************
@@ -142,7 +144,7 @@ def test_swap_best_by_category_reordered():
         their_priority="Decor"
     )
 
-    assert result
+    assert result is True
     assert len(tai.inventory) == 3 and len(jesse.inventory) == 3
     assert tai.inventory == [item_b, item_a, item_f] and jesse.inventory == [item_e, item_d, item_c]
     # *********************************************************************
@@ -172,7 +174,7 @@ def test_swap_best_by_category_no_inventory_is_false():
         their_priority="Decor"
     )
 
-    assert not result
+    assert result is False
     assert len(tai.inventory) == 0
     assert len(jesse.inventory) == 3
     assert item_a in jesse.inventory
@@ -198,7 +200,7 @@ def test_swap_best_by_category_no_other_inventory_is_false():
         their_priority="Clothing"
     )
 
-    assert not result
+    assert result is False
     assert len(tai.inventory) == 3
     assert len(jesse.inventory) == 0
     assert item_a in tai.inventory
@@ -229,7 +231,7 @@ def test_swap_best_by_category_no_match_is_false():
         their_priority="Clothing"
     )
 
-    assert not result
+    assert result is False
     assert len(tai.inventory) == 3 and len(jesse.inventory) == 3
     assert tai.inventory == [item_a, item_b, item_c] and jesse.inventory == [item_d, item_e, item_f]
     # *********************************************************************
@@ -264,7 +266,7 @@ def test_swap_best_by_category_no_other_match_is_false():
         their_priority="Decor"
     )
 
-    assert not result
+    assert result is False
     assert len(tai.inventory) == 3 and len(jesse.inventory) == 3
     assert tai.inventory == [item_c, item_b, item_a] and jesse.inventory == [item_f, item_e, item_d]
     # *********************************************************************

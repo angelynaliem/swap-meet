@@ -48,8 +48,8 @@ def test_get_item_by_id_no_matching():
     )
 
     result_item = vendor.get_by_id(test_id)
+    
     assert result_item is None
-
     items = vendor.inventory
     assert len(items) == 3
     assert item_a in items

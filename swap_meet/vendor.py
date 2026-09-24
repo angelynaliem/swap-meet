@@ -1,12 +1,6 @@
 
 class Vendor:
 
-#Each `Vendor` will have an attribute named `inventory`, 
-#which is an empty list by default
-
-#When we instantiate an instance of `Vendor`, we can 
-#optionally pass in a list with the keyword argument `inventory`
-
     def __init__(self, inventory=None):
         if inventory is None:
             self.inventory = []
@@ -49,20 +43,10 @@ class Vendor:
 
     # Wave 4
     def swap_first_item(self, other_vendor):
-        if len(self.inventory) == 0 or len(other_vendor.inventory) == 0:
+        if not self.inventory or not other_vendor.inventory:
             return False
 
-        my_first_item = self.inventory[0]
-        friend_first_item = other_vendor.inventory[0]
-
-        self.inventory.remove(my_first_item)
-        other_vendor.inventory.append(my_first_item)
-
-
-        other_vendor.inventory.remove(friend_first_item)
-        self.inventory.append(friend_first_item)
-
-        return True
+        return self.swap_items(other_vendor, self.inventory[0], other_vendor.inventory[0])
 
     # Wave 6
     def get_by_category(self, category):
@@ -91,36 +75,10 @@ class Vendor:
 
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
 
-        if other_vendor.inventory == []:
-            return False
-        
-        if self.inventory == []:
-            return False
-
-        my_items_category = []
-        for item in self.inventory:
-            my_items_category.append(item.get_category())
-
-        if their_priority not in my_items_category:
-            return False
-
-        their_items_category = []
-        for item in other_vendor.inventory:
-            their_items_category.append(item.get_category())
-
-        if my_priority not in their_items_category:
-            return False 
-
         my_best_item = self.get_best_by_category(their_priority)
         their_best_item = other_vendor.get_best_by_category(my_priority)
 
-        other_vendor.inventory.remove(their_best_item)
-        self.inventory.remove(my_best_item)
+        if not my_best_item or not their_best_item:
+            return False
 
-        other_vendor.inventory.append(my_best_item)
-        self.inventory.append(their_best_item)
-
-        return True
-
-                    
-        
+        return self.swap_items(other_vendor, my_best_item, their_best_item)
