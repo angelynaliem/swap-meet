@@ -2,14 +2,15 @@ import uuid
 
 
 class Item:
-    def __init__(self, id=None, condition=0):
+    def __init__(self, id=None, condition=0, age=0):
         if id is not None:
             self.id = id
         else:
             self.id = uuid.uuid4().int  
 
         self.condition = condition 
-
+        self.age = age
+        
     #special __str__ method 
     def __str__(self):
         return (f"An object of type Item with id {self.id}.")
