@@ -1,12 +1,6 @@
 
 class Vendor:
 
-#Each `Vendor` will have an attribute named `inventory`, 
-#which is an empty list by default
-
-#When we instantiate an instance of `Vendor`, we can 
-#optionally pass in a list with the keyword argument `inventory`
-
     def __init__(self, inventory=None):
         if inventory is None:
             self.inventory = []
@@ -29,6 +23,7 @@ class Vendor:
             if item.id == id:
                 return item
 
+
     # Wave 3
     def swap_items(self, other_vendor, my_item, their_item):
         
@@ -46,7 +41,10 @@ class Vendor:
         self.add(their_item)
 
         return True
+#remove my item -> add to frend's inventory
+#remove their item -> add to my inventory
 
+# we call swap_items here
     # Wave 4
     def swap_first_item(self, other_vendor):
         if len(self.inventory) == 0 or len(other_vendor.inventory) == 0:
@@ -55,19 +53,18 @@ class Vendor:
         my_first_item = self.inventory[0]
         friend_first_item = other_vendor.inventory[0]
 
-        self.inventory.remove(my_first_item)
-        other_vendor.inventory.append(my_first_item)
-
-
-        other_vendor.inventory.remove(friend_first_item)
-        self.inventory.append(friend_first_item)
+        self.swap_items(other_vendor, my_first_item, friend_first_item)
 
         return True
+#i remove my first item -> add to friend's inventory
+#i remove friend's first item -> add to my inventory
+
+
 
     # Wave 6
     def get_by_category(self, category):
         category_inventory = []
-        
+
         for item in self.inventory:
             if category == item.get_category():
                 category_inventory.append(item)
@@ -82,13 +79,14 @@ class Vendor:
         for item in self.inventory:
 
             if category == item.get_category():
-
+                
                 if item.condition > initial_condition:
                     initial_condition = item.condition
                     highest_condition_item = item
         
         return highest_condition_item
 
+# we call swap_items here
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
 
         if other_vendor.inventory == []:
@@ -114,13 +112,31 @@ class Vendor:
         my_best_item = self.get_best_by_category(their_priority)
         their_best_item = other_vendor.get_best_by_category(my_priority)
 
-        other_vendor.inventory.remove(their_best_item)
-        self.inventory.remove(my_best_item)
+        if my_best_item is None or their_best_item is None:
+            return False
 
-        other_vendor.inventory.append(my_best_item)
-        self.inventory.append(their_best_item)
+        self.swap_items(other_vendor, my_best_item, their_best_item)
 
         return True
 
-                    
+#enhancements 
+    def swap_by_newest(self, other_vendor):
+        #going through their inventory and my inventory to find newest item 
+        # if age is less than the other item 
         
+        # looping through my inventory and their inventory to find the newest item of each one
+        # with the newest item from each inventory, we can call swap_items to swap the items
+        my_newest_item = self.inventory[0]
+
+        for item in self.inventory:
+            if item.age < my_newest_item.age:
+                my_newest_item = item
+
+        their_newest_item = other_vendor.inventory[0]
+        for item in other_vendor.inventory:
+            if item.age < their_newest_item.age:
+                their_newest_item = item
+
+        self.swap_items(other_vendor, my_newest_item, their_newest_item)
+
+        return True
