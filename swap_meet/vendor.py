@@ -3,9 +3,9 @@ class Vendor:
 
     def __init__(self, inventory=None):
         if inventory is None:
-            self.inventory = []
-        else:
-            self.inventory = inventory
+            inventory = []
+#using the local variable, and only assign to the attribute in one place at the end
+        self.inventory = inventory
 
     def add(self, item):
         self.inventory.append(item)
@@ -87,12 +87,11 @@ class Vendor:
         return self.swap_items(other_vendor, my_best_item, their_best_item)
 
     #enhancements 
-    def swap_by_newest(self, other_vendor):
-        
-        # going through their inventory and my inventory to find newest item 
-        # if age is less than the other item 
+    #create helper method
+    def get_newest_item(self):
         # looping through my inventory and their inventory to find the newest item of each one
         # with the newest item from each inventory, we can call swap_items to swap the items
+
 
         my_newest_item = self.inventory[0]
 
@@ -100,11 +99,16 @@ class Vendor:
             if item.age < my_newest_item.age:
                 my_newest_item = item
 
-        their_newest_item = other_vendor.inventory[0]
-        for item in other_vendor.inventory:
-            if item.age < their_newest_item.age:
-                their_newest_item = item
+        return my_newest_item
+
+    def swap_by_newest(self, other_vendor):
+
+        my_newest_item = self.get_newest_item()
+        their_newest_item = other_vendor.get_newest_item()
 
         return self.swap_items(other_vendor, my_newest_item, their_newest_item)
+
+  
+
 
 

@@ -3,10 +3,12 @@ import uuid
 
 class Item:
     def __init__(self, id=None, condition=0, age=0):
-        if id is not None:
-            self.id = id
-        else:
-            self.id = uuid.uuid4().int 
+        if id is None:
+            id = uuid.uuid4().int 
+
+        self.id = id
+        # else:
+        #     self.id = uuid.uuid4().int 
 
         self.condition = condition 
         self.age = age

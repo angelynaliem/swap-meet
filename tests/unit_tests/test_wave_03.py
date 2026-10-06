@@ -134,4 +134,5 @@ def test_swap_items_from_their_empty_returns_false():
 
     assert result is False
     assert len(fatimah.inventory) == 3
+    assert fatimah.inventory == [item_a, item_b, item_c]
     assert jolie.inventory == []
