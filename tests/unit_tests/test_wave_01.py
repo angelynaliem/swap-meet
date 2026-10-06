@@ -49,4 +49,4 @@ def test_removing_not_found_is_none():
 
     result = vendor.remove(item)
     
-    assert result == None
+    assert result is None
