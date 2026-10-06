@@ -5,19 +5,11 @@ class Decor(Item):
     def __init__(self, id=None, width=0, length=0, condition=0, age=0):
         super().__init__(id, condition, age)
 
-        # if id is not None:
-        #     self.id = id
-        # else:
-        #     self.id = uuid.uuid4().int   
-
         self.width = width
         self.length = length
-        # self.condition = condition 
-
-    def get_category(self):
-        return "Decor"
 #
     def __str__(self):
-        return (f"An object of type Decor with id {self.id}. It takes up a {self.width} by {self.length} sized space.")
+        base_str = super().__str__()
+        return (f"{base_str} It takes up a {self.width} by {self.length} sized space.")
 
     
