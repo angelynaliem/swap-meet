@@ -14,10 +14,10 @@ class Item:
         self.age = age
         
     def __str__(self):
-        return (f"An object of type {type(self).__name__} with id {self.id}.")
+        return (f"An object of type {self.get_category()} with id {self.id}.")
         
     def get_category(self):
-        return type(self).__name__
+        return "Item"
 
     def condition_description(self):
 

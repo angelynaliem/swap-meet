@@ -6,6 +6,9 @@ class Clothing(Item):
         super().__init__(id, condition, age)
 
         self.fabric = fabric
+    
+    def get_category(self):
+        return "Clothing"
 
     def __str__(self):
         base_str = super().__str__()
